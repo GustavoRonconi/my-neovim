@@ -1,4 +1,4 @@
-# Plugins    
+# My Neovim Config 💻    
  
 1. `kristijanhusak/vim-dadbod-ui` 
   A UI from SQL DBs (you can perform querys, save and manager databases).
