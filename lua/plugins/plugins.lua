@@ -190,4 +190,20 @@ return {
       require("copilot_cmp").setup()
     end,
   },
+  {
+    "luk400/vim-jukit",
+    config = function()
+      vim.api.nvim_set_keymap("n", "<leader>bkpo", ":call jukit#send#section(0)<CR>", { noremap = true, silent = true })
+      -- Normal mode: send the current line to the output split
+      vim.api.nvim_set_keymap("n", "<leader>rn", ":call jukit#send#line()<CR>", { noremap = true, silent = true })
+
+      -- Visual mode: send the visually selected code to the output split
+      vim.api.nvim_set_keymap(
+        "v",
+        "<leader>rn",
+        ":<C-U>call jukit#send#selection()<CR>",
+        { noremap = true, silent = true }
+      )
+    end,
+  },
 }

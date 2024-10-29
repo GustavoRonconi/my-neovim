@@ -4,6 +4,7 @@
 vim.keymap.set("n", "<C-q>", ":close<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("v", '"', 'c"<C-r>"<Esc>', { noremap = true, silent = true })
 
+-- debbug keymaps
 local dap, dapui = require("dap"), require("dapui")
 
 vim.keymap.set("n", "<F5>", function()
@@ -30,6 +31,7 @@ end)
 
 local copilot_panel = require("copilot.panel")
 
+-- copilot keymaps
 vim.keymap.set("n", "<Leader>oc", function()
   copilot_panel.open({ "botton", 0.4 })
 end)
