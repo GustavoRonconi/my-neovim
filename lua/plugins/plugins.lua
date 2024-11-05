@@ -141,8 +141,10 @@ return {
           end,
           cwd = "${workspaceFolder}",
           stopOnEntry = false,
-          args = {},
-
+          args = function()
+            local input = vim.fn.input("Command-line arguments: ")
+            return vim.split(input, " ", { trimempty = true })
+          end,
           -- If you want to use `rust-gdb` instead of `lldb`:
           runInTerminal = false,
         },
@@ -205,5 +207,33 @@ return {
         { noremap = true, silent = true }
       )
     end,
+  },
+  {
+    "AckslD/nvim-neoclip.lua",
+    dependencies = {
+      "nvim-telescope/telescope.nvim", -- Required for viewing clipboard history
+      "tami5/sqlite.lua", -- Optional, but recommended for persistence
+    },
+    config = function()
+      require("neoclip").setup({
+        history = 1000, -- Set history length, adjust as needed
+        enable_persistent_history = true,
+      })
+      require("telescope").load_extension("neoclip")
+    end,
+  },
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    branch = "canary",
+    dependencies = {
+      { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
+      { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
+    },
+    build = "make tiktoken", -- Only on MacOS or Linux
+    opts = {
+      debug = true, -- Enable debugging
+      -- See Configuration section for rest
+    },
+    -- See Commands section for default commands if you want to lazy load on them
   },
 }

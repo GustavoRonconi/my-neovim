@@ -17,6 +17,16 @@ return {
             },
           },
         },
+        gopls = {
+          settings = {
+            gopls = {
+              analyses = {
+                unusedparams = true, -- Enable checking for unused parameters
+              },
+              staticcheck = true, -- Enable additional static checks
+            },
+          },
+        },
       },
     },
   },

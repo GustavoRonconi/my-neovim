@@ -35,3 +35,15 @@ local copilot_panel = require("copilot.panel")
 vim.keymap.set("n", "<Leader>oc", function()
   copilot_panel.open({ "botton", 0.4 })
 end)
+
+-- lsp errors
+vim.keymap.set("n", "<leader>de", vim.diagnostic.open_float, { noremap = true, silent = true })
+
+-- neoclip
+vim.keymap.set("n", "<leader>fy", ":Telescope neoclip<CR>", { desc = "Open Clipboard History" })
+vim.api.nvim_set_keymap(
+  "n",
+  "<CR>",
+  ":lua require('telescope').extensions.neoclip.default()<CR>",
+  { noremap = true, silent = true }
+)
