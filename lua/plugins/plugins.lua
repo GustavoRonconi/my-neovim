@@ -100,7 +100,7 @@ return {
       local dap_python = require("dap-python")
       --
       -- Set default adapter for Python
-      local python_default = "/Users/gustavoandreronconi/miniconda3/envs/products-api/bin/python"
+      local python_default = "/Users/gustavoandreronconi/miniconda3/envs/data-analysis/bin/python"
       dap_python.setup(python_default)
       --
       -- Load workspace-specific DAP configuration, if it exists
@@ -235,5 +235,11 @@ return {
       -- See Configuration section for rest
     },
     -- See Commands section for default commands if you want to lazy load on them
+  },
+  {
+    "hat0uma/csvview.nvim",
+    config = function()
+      require("csvview").setup()
+    end,
   },
 }

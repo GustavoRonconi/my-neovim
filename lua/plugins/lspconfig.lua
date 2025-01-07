@@ -1,5 +1,3 @@
-require("lspconfig").rust_analyzer.setup({})
-
 return {
   -- Add a setup for your desired LSP servers
   {
