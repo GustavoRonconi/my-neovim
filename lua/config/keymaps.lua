@@ -50,3 +50,7 @@ vim.keymap.set("n", "<leader>fy", ":Telescope neoclip<CR>", { desc = "Open Clipb
 
 -- telescope command History
 vim.keymap.set("n", "<leader>ch", ":Telescope command_history<CR>", { desc = "Command History" })
+
+local builtin = require("telescope.builtin")
+
+vim.keymap.set("n", "<leader>ls", builtin.lsp_document_symbols, { desc = "LSP Document Symbols" })
