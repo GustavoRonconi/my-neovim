@@ -25,6 +25,13 @@ return {
             },
           },
         },
+        tsserver = {
+          settings = {
+            completions = {
+              completeFunctionCalls = true,
+            },
+          },
+        },
       },
     },
   },
@@ -36,4 +43,18 @@ return {
       },
     },
   },
+  -- {
+  --   "jose-elias-alvarez/null-ls.nvim",
+  --   dependencies = {
+  --     "jose-elias-alvarez/nvim-lsp-ts-utils", -- Optional: Additional utilities for TypeScript
+  --   },
+  --   opts = function(_, opts)
+  --     local null_ls = require("null-ls")
+  --     vim.list_extend(opts.sources, {
+  --       null_ls.builtins.formatting.prettier, -- Prettier for formatting
+  --       null_ls.builtins.diagnostics.eslint_d, -- Eslint for linting
+  --       null_ls.builtins.code_actions.eslint_d, -- Eslint for code actions
+  --     })
+  --   end,
+  -- },
 }

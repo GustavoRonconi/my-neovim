@@ -98,11 +98,11 @@ return {
     config = function()
       local dap = require("dap")
       local dap_python = require("dap-python")
-      --
-      -- Set default adapter for Python
+
+      -- Set DAP configuration for Python
       local python_default = "/Users/gustavoandreronconi/miniconda3/envs/data-analysis/bin/python"
       dap_python.setup(python_default)
-      --
+
       -- Load workspace-specific DAP configuration, if it exists
       local workspace_dap_config = vim.fn.getcwd() .. "/.nvim/dap_config.lua"
       if vim.fn.filereadable(workspace_dap_config) == 1 then
@@ -123,14 +123,13 @@ return {
         }
       end
 
-      -- Set LLDB adapter for Rust
+      -- Set DAP configuration for Rust
       dap.adapters.lldb = {
         type = "executable",
         command = "/opt/homebrew/bin/lldb-dap", -- Adjust this path if needed
         name = "lldb",
       }
 
-      -- Set DAP configuration for Rust
       dap.configurations.rust = {
         {
           name = "Launch",
@@ -147,6 +146,52 @@ return {
           end,
           -- If you want to use `rust-gdb` instead of `lldb`:
           runInTerminal = false,
+        },
+      }
+
+      -- Set DAP configuration for Go
+      dap.adapters.delve = {
+        type = "server",
+        host = "127.0.0.1",
+        port = "${port}",
+        executable = {
+          command = "dlv",
+          args = { "dap", "-l", "127.0.0.1:${port}" },
+        },
+      }
+
+      dap.configurations.go = {
+        {
+          type = "delve",
+          name = "Debug",
+          request = "launch",
+          program = "${file}",
+        },
+        {
+          type = "delve",
+          name = "Debug Package",
+          request = "launch",
+          program = "${fileDirname}",
+        },
+        {
+          type = "delve",
+          name = "Attach to Process",
+          request = "attach",
+          processId = require("dap.utils").pick_process,
+        },
+        {
+          type = "delve",
+          name = "Debug Test",
+          request = "launch",
+          mode = "test",
+          program = "${file}",
+        },
+        {
+          type = "delve",
+          name = "Debug Test Package",
+          request = "launch",
+          mode = "test",
+          program = "${fileDirname}",
         },
       }
     end,
@@ -240,6 +285,16 @@ return {
     "hat0uma/csvview.nvim",
     config = function()
       require("csvview").setup()
+    end,
+  },
+  {
+    "jose-elias-alvarez/null-ls.nvim",
+    opts = function(_, opts)
+      local null_ls = require("null-ls")
+      opts.sources = opts.sources or {}
+      vim.list_extend(opts.sources, {
+        null_ls.builtins.formatting.prettier, -- Add Prettier as a formatter
+      })
     end,
   },
 }
