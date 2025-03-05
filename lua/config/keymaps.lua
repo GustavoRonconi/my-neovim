@@ -41,12 +41,6 @@ vim.keymap.set("n", "<leader>de", vim.diagnostic.open_float, { noremap = true, s
 
 -- neoclip
 vim.keymap.set("n", "<leader>fy", ":Telescope neoclip<CR>", { desc = "Open Clipboard History" })
--- vim.api.nvim_set_keymap(
---   "n",
---   "<CR>",
---   ":lua require('telescope').extensions.neoclip.default()<CR>",
---   { noremap = true, silent = true }
--- )
 
 -- telescope command History
 vim.keymap.set("n", "<leader>ch", ":Telescope command_history<CR>", { desc = "Command History" })
